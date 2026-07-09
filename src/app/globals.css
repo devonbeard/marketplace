@@ -370,9 +370,13 @@ body {
 
 .theme-toggle {
   display: inline-flex;
+  background: var(--surface-elevated);
 }
 
-.theme-toggle:hover,
+.theme-toggle:hover {
+  background: var(--surface-elevated-hover);
+}
+
 .top-nav .nav-menu-toggle:hover {
   background: var(--surface-hover-subtle);
 }

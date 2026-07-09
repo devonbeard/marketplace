@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "@phosphor-icons/react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useTheme } from "@/components/ThemeProvider";
 
 const iconTransition = {
@@ -9,6 +9,9 @@ const iconTransition = {
   duration: 0.3,
   bounce: 0,
 };
+
+const iconHidden = { opacity: 0, scale: 0.25, filter: "blur(4px)" };
+const iconVisible = { opacity: 1, scale: 1, filter: "blur(0px)" };
 
 type ThemeToggleProps = {
   className?: string;
@@ -18,6 +21,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const reduce = useReducedMotion();
   const isDark = theme === "dark";
+  const transition = reduce ? { duration: 0 } : iconTransition;
 
   return (
     <button
@@ -28,39 +32,22 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       aria-pressed={!isDark}
     >
       <span className="theme-toggle-icon" aria-hidden>
-        <AnimatePresence mode="wait" initial={false}>
-          {isDark ? (
-            <motion.span
-              key="sun"
-              className="theme-toggle-icon-layer"
-              initial={
-                reduce ? false : { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-              }
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={
-                reduce ? undefined : { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-              }
-              transition={reduce ? { duration: 0 } : iconTransition}
-            >
-              <Sun size={20} weight="light" />
-            </motion.span>
-          ) : (
-            <motion.span
-              key="moon"
-              className="theme-toggle-icon-layer"
-              initial={
-                reduce ? false : { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-              }
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={
-                reduce ? undefined : { opacity: 0, scale: 0.25, filter: "blur(4px)" }
-              }
-              transition={reduce ? { duration: 0 } : iconTransition}
-            >
-              <Moon size={20} weight="light" />
-            </motion.span>
-          )}
-        </AnimatePresence>
+        <motion.span
+          className="theme-toggle-icon-layer"
+          initial={false}
+          animate={isDark ? iconVisible : iconHidden}
+          transition={transition}
+        >
+          <Sun size={20} weight="light" />
+        </motion.span>
+        <motion.span
+          className="theme-toggle-icon-layer"
+          initial={false}
+          animate={isDark ? iconHidden : iconVisible}
+          transition={transition}
+        >
+          <Moon size={20} weight="light" />
+        </motion.span>
       </span>
     </button>
   );
