@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Atelier
+
+A premium NFT auction marketplace mockup built with Next.js, React, Tailwind CSS, and Motion. Designed as a cinematic, gallery-grade experience inspired by Apple TV and Sotheby's auction houses.
+
+## Stack
+
+- **Next.js 16** (App Router, TypeScript)
+- **Tailwind CSS v4**
+- **Motion** (animations)
+- **Phosphor Icons** (light weight)
+- **Geist** typography via `next/font`
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Description |
+| --- | --- |
+| `/` | Home page with featured live auction, collections shelf, live auctions bento, artist spotlight, and recent sales |
+| `/marketplace` | Collection listing with floor prices, volume, top offers, and 7d change |
+| `/collection/[id]` | Collection detail with market stats and available lots |
+| `/nft/[id]` | NFT detail page with artwork display, bid panel, bid history, provenance timeline, and related works |
 
-## Learn More
+## Mock Data
 
-To learn more about Next.js, take a look at the following resources:
+All artwork, prices, bids, and collector addresses are mock data defined in `src/lib/data.ts`. Generated artwork lives in `public/art/`. The "Place bid" flow simulates a transaction with loading and success states.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run dev      # Start development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-## Deploy on Vercel
+## Design Notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Single locked dark theme with warm gold accent
+- Floating glass pill navigation
+- Double-bezel artwork framing
+- Tabular-nums for all prices and countdowns
+- Reduced motion support throughout
